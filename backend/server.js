@@ -8,16 +8,24 @@ const errorHandler = require('./middleware/errorHandler')
 connectDB()
 
 const app = express()
-app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], credentials: true }))
+app.use(cors({
+  origin: [
+    'http://localhost:5173',
+    'http://127.0.0.1:5173',
+    'https://luxe-backend-3ctc.onrender.com',      // Render backend
+    /^https:\/\/.*\.vercel\.app$/,                  // Any Vercel deployment URL
+  ],
+  credentials: true
+}))
 app.use(express.json())
 app.use(morgan('dev'))
 
 app.get('/', (req, res) => res.json({ message: 'LUXE API Running' }))
-app.use('/api/auth',     require('./routes/auth'))
+app.use('/api/auth', require('./routes/auth'))
 app.use('/api/products', require('./routes/products'))
-app.use('/api/users',    require('./routes/users'))
-app.use('/api/cart',     require('./routes/cart'))
-app.use('/api/orders',   require('./routes/orders'))
+app.use('/api/users', require('./routes/users'))
+app.use('/api/cart', require('./routes/cart'))
+app.use('/api/orders', require('./routes/orders'))
 
 app.use(errorHandler)
 
