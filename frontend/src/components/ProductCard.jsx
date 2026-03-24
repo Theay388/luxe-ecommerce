@@ -24,9 +24,10 @@ export default function ProductCard({ product }) {
     <div className="product-card" onClick={() => navigate(`/product/${product._id}`)}>
       <div className="product-card__img-wrap">
         <img
-          src={product.images?.[0] || 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600'}
+          src={product.images?.[0] || 'https://placehold.co/400x500/1a1a1a/998f81?text=LUXE'}
           alt={product.name}
           loading="lazy"
+          onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://placehold.co/400x500/1a1a1a/998f81?text=LUXE' }}
         />
         <button className="product-card__wishlist" onClick={handleWishlist} title="Add to Wishlist">
           <FiHeart />
