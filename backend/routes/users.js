@@ -1,0 +1,12 @@
+const router = require('express').Router()
+const { getProfile, updateProfile, addAddress, updateAddress, deleteAddress, toggleWishlist, getAllUsers, deleteUser } = require('../controllers/userController')
+const { protect, admin } = require('../middleware/auth')
+router.get('/profile', protect, getProfile)
+router.put('/profile', protect, updateProfile)
+router.post('/address', protect, addAddress)
+router.put('/address/:id', protect, updateAddress)
+router.delete('/address/:id', protect, deleteAddress)
+router.post('/wishlist/:productId', protect, toggleWishlist)
+router.get('/', protect, admin, getAllUsers)
+router.delete('/:id', protect, admin, deleteUser)
+module.exports = router

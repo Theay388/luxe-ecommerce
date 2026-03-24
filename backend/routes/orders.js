@@ -1,0 +1,10 @@
+const router = require('express').Router()
+const c = require('../controllers/orderController')
+const { protect, admin } = require('../middleware/auth')
+router.post('/', protect, c.createOrder)
+router.get('/mine', protect, c.getMyOrders)
+router.get('/stats', protect, admin, c.getDashboardStats)
+router.get('/', protect, admin, c.getAllOrders)
+router.get('/:id', protect, c.getOrder)
+router.put('/:id/status', protect, admin, c.updateOrderStatus)
+module.exports = router
