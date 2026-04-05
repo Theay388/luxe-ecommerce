@@ -7,7 +7,7 @@ import { useAuth } from '../context/AuthContext'
 import { useToast } from '../context/ToastContext'
 import ProductCard from '../components/ProductCard'
 
-const fmt = n => `£${Number(n).toFixed(2)}`
+const fmt = n => `€${Number(n).toFixed(2)}`
 
 function Stars({ rating }) {
   return <div className="stars">{[1,2,3,4,5].map(s => <span key={s}>{s <= Math.round(rating) ? '★' : '☆'}</span>)}</div>
@@ -84,41 +84,41 @@ export default function ProductDetail() {
 
   return (
     <main>
-      <div className="container" style={{ padding: 'var(--space-10) var(--space-8)' }}>
+      <div className="container" style={{ padding: 'var(--space-6) var(--space-4)' }}>
         <p className="breadcrumb">
           <span onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>Home</span> /&nbsp;
           <span onClick={() => navigate(`/shop?category=${product.category}`)} style={{ cursor: 'pointer' }}>{product.category}</span> /&nbsp;
           <span>{product.name}</span>
         </p>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-12)', marginTop: 'var(--space-8)' }}>
+        <div className="product-detail">
           {/* Gallery */}
-          <div>
-            <div style={{ aspectRatio: '4/5', overflow: 'hidden', background: 'var(--color-bg-low)', marginBottom: 'var(--space-3)' }}>
-              <img src={product.images?.[selImg] || product.images?.[0]} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div className="product-gallery">
+            <div className="product-gallery__main">
+              <img src={product.images?.[selImg] || product.images?.[0]} alt={product.name} />
             </div>
-            <div style={{ display: 'flex', gap: 'var(--space-2)' }}>
+            <div className="product-gallery__thumbs">
               {product.images?.map((img, i) => (
-                <div key={i} onClick={() => setSelImg(i)} style={{ width: '72px', height: '90px', overflow: 'hidden', cursor: 'pointer', border: i === selImg ? '1px solid var(--color-gold-lt)' : '1px solid transparent', opacity: i === selImg ? 1 : 0.6 }}>
-                  <img src={img} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div key={i} onClick={() => setSelImg(i)} className={`product-gallery__thumb ${i === selImg ? 'active' : ''}`}>
+                  <img src={img} alt="" />
                 </div>
               ))}
             </div>
           </div>
           {/* Info */}
-          <div style={{ padding: 'var(--space-4) 0' }}>
-            <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.75rem', marginBottom: 'var(--space-3)' }}>{product.name}</h1>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-4)' }}>
+          <div className="product-info">
+            <h1 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.5rem, 4vw, 1.75rem)', marginBottom: 'var(--space-3)' }}>{product.name}</h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', marginBottom: 'var(--space-4)', flexWrap: 'wrap' }}>
               <Stars rating={product.rating} />
               <span style={{ fontSize: '0.8rem', color: 'var(--color-muted)' }}>({product.numReviews} reviews)</span>
             </div>
             <div style={{ marginBottom: 'var(--space-5)' }}>
-              <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.5rem', color: product.comparePrice > 0 ? 'var(--color-gold-lt)' : 'var(--color-text)' }}>{fmt(product.price)}</span>
+              <span style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', color: product.comparePrice > 0 ? 'var(--color-gold-lt)' : 'var(--color-text)' }}>{fmt(product.price)}</span>
               {product.comparePrice > 0 && <span style={{ marginLeft: 'var(--space-3)', textDecoration: 'line-through', color: 'var(--color-muted)', fontSize: '1rem' }}>{fmt(product.comparePrice)}</span>}
             </div>
             <hr className="divider divider-gold" />
             {product.colors?.length > 0 && (
-              <div style={{ marginBottom: 'var(--space-6)' }}>
-                <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-3)' }}>Color — <span style={{ color: 'var(--color-text)' }}>{selColor}</span></p>
+              <div style={{ marginBottom: 'var(--space-5)' }}>
+                <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-2)' }}>Color — <span style={{ color: 'var(--color-text)' }}>{selColor}</span></p>
                 <div className="color-swatches">
                   {product.colors.map(c => <div key={c} className={`color-swatch ${selColor === c ? 'selected' : ''}`} title={c}
                     style={{ background: c.toLowerCase() === 'ivory' ? '#f5f0eb' : c.toLowerCase() === 'camel' ? '#c9a96e' : c.toLowerCase() === 'charcoal' ? '#4a4a4a' : c.toLowerCase() }}
@@ -127,30 +127,30 @@ export default function ProductDetail() {
               </div>
             )}
             {product.sizes?.length > 0 && (
-              <div style={{ marginBottom: 'var(--space-6)' }}>
-                <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-3)' }}>Size — <span style={{ color: 'var(--color-text)' }}>{selSize}</span></p>
+              <div style={{ marginBottom: 'var(--space-5)' }}>
+                <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-2)' }}>Size — <span style={{ color: 'var(--color-text)' }}>{selSize}</span></p>
                 <div className="size-chips">
                   {product.sizes.map(s => <div key={s} className={`size-chip ${selSize === s ? 'selected' : ''}`} onClick={() => setSelSize(s)}>{s}</div>)}
                 </div>
               </div>
             )}
-            <div style={{ marginBottom: 'var(--space-6)' }}>
-              <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-3)' }}>Quantity</p>
+            <div style={{ marginBottom: 'var(--space-5)' }}>
+              <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-2)' }}>Quantity</p>
               <div className="qty-stepper">
                 <button className="qty-stepper__btn" onClick={() => setQty(q => Math.max(1, q - 1))}>−</button>
                 <span className="qty-stepper__val">{qty}</span>
                 <button className="qty-stepper__btn" onClick={() => setQty(q => q + 1)}>+</button>
               </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginBottom: 'var(--space-6)' }}>
-              <button className="btn btn-primary btn-full" onClick={handleAddToCart} disabled={product.stock === 0}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)', marginBottom: 'var(--space-5)' }}>
+              <button className="btn btn-primary" onClick={handleAddToCart} disabled={product.stock === 0}>
                 {product.stock === 0 ? 'Out of Stock' : 'Add to Cart'}
               </button>
-              <button className="btn btn-secondary btn-full" onClick={handleWishlist}>
+              <button className="btn btn-secondary" onClick={handleWishlist}>
                 <FiHeart /> Add to Wishlist
               </button>
             </div>
-            <p style={{ fontSize: '0.8rem', fontStyle: 'italic', color: 'var(--color-muted)' }}>✦ Complimentary shipping on orders over £200</p>
+            <p style={{ fontSize: '0.8rem', fontStyle: 'italic', color: 'var(--color-muted)', marginBottom: 'var(--space-4)' }}>✦ Complimentary shipping on orders over €200</p>
             <hr className="divider" />
             <Accordion title="Product Details" defaultOpen={true}>
               <p>{product.description}</p>
@@ -161,18 +161,18 @@ export default function ProductDetail() {
               <p>Dry clean recommended. For cashmere, hand wash cold. Lay flat to dry. Store in a breathable garment bag.</p>
             </Accordion>
             <Accordion title="Delivery & Returns">
-              <p>Complimentary standard shipping on orders over £200. Returns accepted within 30 days in original condition.</p>
+              <p>Complimentary standard shipping on orders over €200. Returns accepted within 30 days in original condition.</p>
             </Accordion>
           </div>
         </div>
 
         {/* Reviews */}
-        <section className="section">
-          <h2 className="section-title" style={{ marginBottom: 'var(--space-8)' }}>Customer Reviews</h2>
-          {product.reviews?.length === 0 && <p style={{ color: 'var(--color-muted)' }}>No reviews yet. Be the first to share your experience.</p>}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 'var(--space-6)' }}>
+        <section className="section" style={{ padding: 'var(--space-10) 0' }}>
+          <h2 className="section-title" style={{ marginBottom: 'var(--space-6)' }}>Customer Reviews</h2>
+          {product.reviews?.length === 0 && <p style={{ color: 'var(--color-muted)', marginBottom: 'var(--space-6)' }}>No reviews yet. Be the first to share your experience.</p>}
+          <div className="reviews-grid">
             {product.reviews?.map(r => (
-              <div key={r._id} style={{ background: 'var(--color-bg-low)', padding: 'var(--space-5)' }}>
+              <div key={r._id} style={{ background: 'var(--color-bg-low)', padding: 'var(--space-4)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
                   <span style={{ fontWeight: 500 }}>{r.name}</span>
                   <Stars rating={r.rating} />
@@ -181,8 +181,8 @@ export default function ProductDetail() {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: 'var(--space-8)', maxWidth: '500px' }}>
-            <h3 style={{ fontFamily: 'var(--font-serif)', marginBottom: 'var(--space-6)' }}>Write a Review</h3>
+          <div style={{ marginTop: 'var(--space-6)', maxWidth: '500px' }}>
+            <h3 style={{ fontFamily: 'var(--font-serif)', marginBottom: 'var(--space-4)' }}>Write a Review</h3>
             <form onSubmit={handleReview}>
               <div className="form-group">
                 <label className="form-label">Rating</label>
@@ -201,7 +201,7 @@ export default function ProductDetail() {
         </section>
 
         {related.length > 0 && (
-          <section className="section">
+          <section className="section" style={{ padding: 'var(--space-10) 0' }}>
             <p className="section-subtitle">You May Also Like</p>
             <div className="grid-4">{related.slice(0, 4).map(p => <ProductCard key={p._id} product={p} />)}</div>
           </section>

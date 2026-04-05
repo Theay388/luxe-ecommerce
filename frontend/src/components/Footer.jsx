@@ -6,13 +6,15 @@ export default function Footer() {
       <div className="container">
         <div className="footer__grid">
           <div>
-            <div className="footer__logo">LUXE</div>
+            <div className="footer__logo">STYLE NEST</div>
             <p className="footer__desc">Crafted for those who dare to be different. Luxury clothing and accessories for the discerning individual.</p>
           </div>
           <div>
             <div className="footer__heading">Collections</div>
             <Link to="/shop?category=Women" className="footer__link">Women</Link>
             <Link to="/shop?category=Men" className="footer__link">Men</Link>
+            <Link to="/shop?category=Kids" className="footer__link">Kids</Link>
+            <Link to="/shop?category=Babies" className="footer__link">Babies</Link>
             <Link to="/shop?category=Accessories" className="footer__link">Accessories</Link>
             <Link to="/shop?sale=true" className="footer__link">Sale</Link>
           </div>
@@ -32,7 +34,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer__bottom">
-          <span className="footer__copy">© 2025 LUXE. All rights reserved.</span>
+          <span className="footer__copy">© 2025 Style Nest. All rights reserved.</span>
           <span className="footer__copy text-muted">Visa · Mastercard · PayPal</span>
         </div>
       </div>

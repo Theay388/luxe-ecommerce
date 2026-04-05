@@ -20,7 +20,7 @@ app.use(cors({
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.get('/', (req, res) => res.json({ message: 'LUXE API Running' }))
+app.get('/', (req, res) => res.json({ message: 'Style Nest API Running' }))
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/products', require('./routes/products'))
 app.use('/api/users', require('./routes/users'))

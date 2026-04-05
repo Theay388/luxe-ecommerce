@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import api from '../services/api'
 
-const fmt = n => `£${Number(n).toFixed(2)}`
+const fmt = n => `€${Number(n).toFixed(2)}`
 
 export default function OrderDetail() {
   const { id } = useParams()

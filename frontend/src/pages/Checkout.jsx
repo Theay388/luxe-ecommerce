@@ -4,7 +4,7 @@ import api from '../services/api'
 import { useCart } from '../context/CartContext'
 import { useToast } from '../context/ToastContext'
 
-const fmt = n => `£${Number(n).toFixed(2)}`
+const fmt = n => `€${Number(n).toFixed(2)}`
 const STEPS = ['Shipping', 'Review', 'Payment', 'Confirmation']
 
 export default function Checkout() {

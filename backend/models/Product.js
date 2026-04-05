@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true, min: 0 },
   comparePrice: { type: Number, default: 0 },
   images: [{ type: String }],
-  category: { type: String, required: true, enum: ['Women','Men','Accessories'] },
+  category: { type: String, required: true, enum: ['Women','Men','Kids','Babies','Accessories'] },
   subcategory: { type: String },
   sizes: [{ type: String }],
   colors: [{ type: String }],

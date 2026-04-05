@@ -11,6 +11,7 @@ export default function Navbar() {
   const location = useLocation()
   const [search, setSearch] = useState('')
   const [searchOpen, setSearchOpen] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -24,14 +25,17 @@ export default function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar__inner">
-        <Link to="/" className="navbar__logo">LUXE</Link>
+        <Link to="/" className="navbar__logo">STYLE NEST</Link>
         <div className="navbar__links">
           <Link to="/shop?category=Women" className="navbar__link">Women</Link>
           <Link to="/shop?category=Men" className="navbar__link">Men</Link>
+          <Link to="/shop?category=Kids" className="navbar__link">Kids</Link>
+          <Link to="/shop?category=Babies" className="navbar__link">Babies</Link>
           <Link to="/shop?category=Accessories" className="navbar__link">Accessories</Link>
           <Link to="/shop?sale=true" className="navbar__link text-gold">Sale</Link>
         </div>
         <div className="navbar__actions">
+          <button className="navbar__toggle" onClick={() => setMobileOpen(v => !v)} aria-label="Menu">☰</button>
           {searchOpen ? (
             <form onSubmit={handleSearch} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <input
@@ -58,6 +62,16 @@ export default function Navbar() {
           </Link>
         </div>
       </div>
+      {mobileOpen && (
+        <div className="navbar__mobile" role="navigation" aria-label="Mobile menu">
+          <Link to="/shop?category=Women" className="navbar__link" onClick={() => setMobileOpen(false)}>Women</Link>
+          <Link to="/shop?category=Men" className="navbar__link" onClick={() => setMobileOpen(false)}>Men</Link>
+          <Link to="/shop?category=Kids" className="navbar__link" onClick={() => setMobileOpen(false)}>Kids</Link>
+          <Link to="/shop?category=Babies" className="navbar__link" onClick={() => setMobileOpen(false)}>Babies</Link>
+          <Link to="/shop?category=Accessories" className="navbar__link" onClick={() => setMobileOpen(false)}>Accessories</Link>
+          <Link to="/shop?sale=true" className="navbar__link" onClick={() => setMobileOpen(false)}>Sale</Link>
+        </div>
+      )}
     </nav>
   )
 }

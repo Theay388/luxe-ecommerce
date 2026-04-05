@@ -31,8 +31,8 @@ export default function Auth() {
     <main style={{ minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 'var(--space-8)' }}>
       <div style={{ width: '100%', maxWidth: '420px' }}>
         <div style={{ textAlign: 'center', marginBottom: 'var(--space-10)' }}>
-          <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', letterSpacing: '0.3em', color: 'var(--color-gold-lt)', marginBottom: 'var(--space-2)' }}>LUXE</div>
-          <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>The Atelier Experience</p>
+          <div style={{ fontFamily: 'var(--font-serif)', fontSize: '2rem', letterSpacing: '0.3em', color: 'var(--color-gold-lt)', marginBottom: 'var(--space-2)' }}>STYLE NEST</div>
+          <p style={{ fontSize: '0.75rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>The Style Experience</p>
         </div>
         <div style={{ display: 'flex', marginBottom: 'var(--space-8)', borderBottom: '1px solid rgba(153,143,129,0.2)' }}>
           {['login', 'register'].map(t => (
@@ -63,7 +63,7 @@ export default function Auth() {
         <button className="btn-ghost btn-full" style={{ textAlign: 'center', display: 'block', margin: '0 auto' }} onClick={() => navigate('/')}>Continue as Guest →</button>
         {tab === 'login' && (
           <p style={{ textAlign: 'center', marginTop: 'var(--space-6)', fontSize: '0.75rem', color: 'var(--color-muted)' }}>
-            Admin demo: <span style={{ color: 'var(--color-gold)' }}>admin@luxe.com</span> / admin123
+            Admin demo: <span style={{ color: 'var(--color-gold)' }}>admin@stylenest.com</span> / admin123
           </p>
         )}
       </div>

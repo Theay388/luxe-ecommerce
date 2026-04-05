@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { FiTrash2 } from 'react-icons/fi'
 import { useCart } from '../context/CartContext'
 
-const fmt = n => `£${Number(n).toFixed(2)}`
+const fmt = n => `€${Number(n).toFixed(2)}`
 
 export default function Cart() {
   const { cart, updateQty, removeItem, cartTotal } = useCart()
@@ -21,20 +21,20 @@ export default function Cart() {
 
   return (
     <main>
-      <div className="container" style={{ padding: 'var(--space-10) var(--space-8)' }}>
-        <h1 style={{ fontFamily: 'var(--font-serif)', marginBottom: 'var(--space-10)' }}>
+      <div className="container" style={{ padding: 'var(--space-8) var(--space-4)' }}>
+        <h1 style={{ fontFamily: 'var(--font-serif)', marginBottom: 'var(--space-8)' }}>
           Your Cart — {cart.reduce((s, i) => s + i.qty, 0)} Item{cart.length !== 1 ? 's' : ''}
         </h1>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 360px', gap: 'var(--space-12)' }}>
+        <div className="cart-layout">
           {/* Items */}
           <div>
             {cart.map((item, idx) => (
-              <div key={idx} style={{ display: 'grid', gridTemplateColumns: '80px 1fr auto', gap: 'var(--space-5)', paddingBottom: 'var(--space-6)', marginBottom: 'var(--space-6)', borderBottom: '1px solid rgba(153,143,129,0.15)' }}>
-                <div style={{ aspectRatio: '1', overflow: 'hidden', background: 'var(--color-bg-low)', cursor: 'pointer' }}
+              <div key={idx} className="cart-item">
+                <div className="cart-item__img"
                   onClick={() => navigate(`/product/${item.product}`)}>
-                  <img src={item.image} alt={item.name} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <img src={item.image} alt={item.name} />
                 </div>
-                <div>
+                <div className="cart-item__info">
                   <p style={{ fontFamily: 'var(--font-serif)', marginBottom: 'var(--space-1)' }}>{item.name}</p>
                   <p style={{ fontSize: '0.75rem', color: 'var(--color-muted)', marginBottom: 'var(--space-3)' }}>Size: {item.size} · Color: {item.color}</p>
                   <div className="qty-stepper">
@@ -43,7 +43,7 @@ export default function Cart() {
                     <button className="qty-stepper__btn" onClick={() => updateQty(item._id, item.qty + 1, item.product, item.size)}>+</button>
                   </div>
                 </div>
-                <div style={{ textAlign: 'right' }}>
+                <div className="cart-item__actions">
                   <p style={{ marginBottom: 'var(--space-3)' }}>{fmt(item.price * item.qty)}</p>
                   <button onClick={() => removeItem(item._id, item.product, item.size, item.color)}
                     style={{ color: 'var(--color-muted)', fontSize: '0.9rem', transition: 'color 0.2s' }}
@@ -57,8 +57,8 @@ export default function Cart() {
             <button className="btn-ghost" onClick={() => navigate('/shop')}>← Continue Shopping</button>
           </div>
           {/* Summary */}
-          <div style={{ background: 'var(--color-bg-low)', padding: 'var(--space-8)', height: 'fit-content' }}>
-            <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-6)' }}>Order Summary</p>
+          <div className="cart-summary">
+            <p className="text-uppercase text-small text-muted" style={{ marginBottom: 'var(--space-5)' }}>Order Summary</p>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-3)' }}>
               <span style={{ color: 'var(--color-muted)' }}>Subtotal</span><span>{fmt(cartTotal)}</span>
             </div>
@@ -66,11 +66,11 @@ export default function Cart() {
               <span style={{ color: 'var(--color-muted)' }}>Shipping</span>
               <span>{shipping === 0 ? 'Complimentary' : fmt(shipping)}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-5)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-4)' }}>
               <span style={{ color: 'var(--color-muted)' }}>Tax (10%)</span><span>{fmt(tax)}</span>
             </div>
             <hr className="divider divider-gold" />
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-6)' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-5)' }}>
               <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem' }}>Total</span>
               <span style={{ fontFamily: 'var(--font-serif)', fontSize: '1.1rem', color: 'var(--color-gold-lt)' }}>{fmt(total)}</span>
             </div>

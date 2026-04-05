@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import { useToast } from '../context/ToastContext'
 import api from '../services/api'
 
-const fmt = (n) => `£${Number(n).toFixed(2)}`
+const fmt = (n) => `€${Number(n).toFixed(2)}`
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate()
@@ -24,10 +24,10 @@ export default function ProductCard({ product }) {
     <div className="product-card" onClick={() => navigate(`/product/${product._id}`)}>
       <div className="product-card__img-wrap">
         <img
-          src={product.images?.[0] || 'https://placehold.co/400x500/1a1a1a/998f81?text=LUXE'}
+          src={product.images?.[0] || 'https://placehold.co/400x500/1a1a1a/998f81?text=STYLENEST'}
           alt={product.name}
           loading="lazy"
-          onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://placehold.co/400x500/1a1a1a/998f81?text=LUXE' }}
+          onError={e => { e.currentTarget.onerror = null; e.currentTarget.src = 'https://placehold.co/400x500/1a1a1a/998f81?text=STYLENEST' }}
         />
         <button className="product-card__wishlist" onClick={handleWishlist} title="Add to Wishlist">
           <FiHeart />

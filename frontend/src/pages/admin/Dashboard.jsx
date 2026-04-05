@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import api from '../../services/api'
 
-const fmt = n => `£${Number(n).toFixed(2)}`
+const fmt = n => `€${Number(n).toFixed(2)}`
 const navItems = [
   { label: 'Dashboard', path: '/admin' },
   { label: 'Products', path: '/admin/products' },
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
   return (
     <div style={{ display: 'flex', minHeight: '100vh' }}>
       <aside style={{ width: '220px', background: 'var(--color-bg-low)', padding: 'var(--space-8)', flexShrink: 0 }}>
-        <p style={{ fontFamily: 'var(--font-serif)', fontSize: '0.85rem', letterSpacing: '0.25em', color: 'var(--color-gold-lt)', textTransform: 'uppercase', marginBottom: 'var(--space-10)' }}>Luxe Admin</p>
+        <p style={{ fontFamily: 'var(--font-serif)', fontSize: '0.85rem', letterSpacing: '0.25em', color: 'var(--color-gold-lt)', textTransform: 'uppercase', marginBottom: 'var(--space-10)' }}>Style Nest Admin</p>
         {navItems.map(n => (
           <div key={n.label} onClick={() => navigate(n.path)} style={{ padding: 'var(--space-3) var(--space-4)', fontSize: '0.8rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: window.location.pathname === n.path ? 'var(--color-gold-lt)' : 'var(--color-muted)', cursor: 'pointer', borderLeft: window.location.pathname === n.path ? '2px solid var(--color-gold-lt)' : '2px solid transparent', marginBottom: 'var(--space-2)', transition: 'color 0.2s' }}>{n.label}</div>
         ))}

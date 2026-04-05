@@ -3,6 +3,7 @@ import api from '../../services/api'
 import { useToast } from '../../context/ToastContext'
 
 const blank = { name: '', description: '', price: '', comparePrice: '', category: 'Women', subcategory: '', sizes: '', colors: '', stock: 10, images: '', isFeatured: false, isNewArrival: false }
+const CATEGORIES = ['Women', 'Men', 'Kids', 'Babies', 'Accessories']
 
 export default function AdminProducts() {
   const [products, setProducts] = useState([])
@@ -56,14 +57,14 @@ export default function AdminProducts() {
               <div className="form-group"><label className="form-label">Name</label><input className="form-input" required value={form.name} onChange={e => set('name', e.target.value)} /></div>
               <div className="form-group"><label className="form-label">Category</label>
                 <select className="form-input" style={{ background: 'var(--color-bg-mid)' }} value={form.category} onChange={e => set('category', e.target.value)}>
-                  <option>Women</option><option>Men</option><option>Accessories</option>
+                  {CATEGORIES.map(c => <option key={c}>{c}</option>)}
                 </select>
               </div>
             </div>
             <div className="form-group"><label className="form-label">Description</label><textarea className="form-input" rows={3} style={{ resize: 'vertical', borderBottom: '1px solid rgba(153,143,129,0.4)' }} required value={form.description} onChange={e => set('description', e.target.value)} /></div>
             <div className="form-row">
-              <div className="form-group"><label className="form-label">Price (£)</label><input className="form-input" type="number" step="0.01" required value={form.price} onChange={e => set('price', e.target.value)} /></div>
-              <div className="form-group"><label className="form-label">Compare Price (£)</label><input className="form-input" type="number" step="0.01" value={form.comparePrice} onChange={e => set('comparePrice', e.target.value)} /></div>
+              <div className="form-group"><label className="form-label">Price (€)</label><input className="form-input" type="number" step="0.01" required value={form.price} onChange={e => set('price', e.target.value)} /></div>
+              <div className="form-group"><label className="form-label">Compare Price (€)</label><input className="form-input" type="number" step="0.01" value={form.comparePrice} onChange={e => set('comparePrice', e.target.value)} /></div>
             </div>
             <div className="form-row">
               <div className="form-group"><label className="form-label">Sizes (comma-separated)</label><input className="form-input" value={form.sizes} onChange={e => set('sizes', e.target.value)} placeholder="XS, S, M, L, XL" /></div>
@@ -101,7 +102,7 @@ export default function AdminProducts() {
                 <span style={{ fontFamily: 'var(--font-serif)' }}>{p.name}</span>
               </div></td>
               <td style={{ padding: 'var(--space-3) 0', color: 'var(--color-muted)' }}>{p.category}</td>
-              <td style={{ padding: 'var(--space-3) 0', color: 'var(--color-gold-lt)' }}>£{p.price}</td>
+              <td style={{ padding: 'var(--space-3) 0', color: 'var(--color-gold-lt)' }}>€{p.price}</td>
               <td style={{ padding: 'var(--space-3) 0', color: p.stock < 5 ? 'var(--color-error)' : 'var(--color-muted)' }}>{p.stock}</td>
               <td style={{ padding: 'var(--space-3) 0' }}>
                 <button className="btn-ghost" style={{ marginRight: 'var(--space-4)' }} onClick={() => handleEdit(p)}>Edit</button>

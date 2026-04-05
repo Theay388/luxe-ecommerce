@@ -3,7 +3,7 @@ import api from '../../services/api'
 import { useToast } from '../../context/ToastContext'
 
 const STATUSES = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled']
-const fmt = n => `£${Number(n).toFixed(2)}`
+const fmt = n => `€${Number(n).toFixed(2)}`
 
 export default function AdminOrders() {
   const [orders, setOrders] = useState([])
