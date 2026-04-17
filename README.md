@@ -1,4 +1,4 @@
-# LUXE — Premium Clothing & Accessories
+# stylenest — Premium Clothing & Accessories
 
 > A full-stack e-commerce platform for a luxury fashion brand, featuring a dark editorial aesthetic, complete user authentication, product management, and order tracking.
 
